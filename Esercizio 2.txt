@@ -130,10 +130,11 @@ where libri.Anno > 1960 and libri.Anno < 2000
 
 --10  ottenere il numero di autori con i loro dati che hanno scritto piu' di 2 libri 
 
-select autori.AutoreID, autori.Nome, autori.Cognome, autori.Annon, autori.annoM, autori.sesso, autori.Nazione, COUNT(libri.LibroID) as numeroLibri
+select autori.Nome, autori.Cognome, autori.Nazione, COUNT(libri.AutoreID) as numeroLibri
 from autori
-left join libri on libri.AutoreID = libri.AutoreID  
-GROUP BY autori.AutoreID having numeroLibri > 2;
+join libri on autori.AutoreID = libri.AutoreID  
+GROUP BY autori.AutoreID 
+having count(libri.AutoreID) > 2;
 
 
 
